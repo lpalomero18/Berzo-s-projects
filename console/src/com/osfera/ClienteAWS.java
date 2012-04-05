@@ -1,4 +1,5 @@
 package com.osfera;
+
 /*
  * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -66,7 +67,7 @@ import com.amazonaws.services.simpledb.model.ListDomainsResult;
  * - A subscription to Amazon S3. You can sign up for S3 at:
  * http://aws.amazon.com/s3/
  */
-public class AwsConsoleApp {
+public class ClienteAWS {
 
 	/*
 	 * Important: Be sure to fill in your AWS access credentials in the
@@ -74,10 +75,28 @@ public class AwsConsoleApp {
 	 * http://aws.amazon.com/security-credentials
 	 */
 
-	static AmazonEC2 ec2;
-	static AmazonS3 s3;
-	static AmazonSimpleDB sdb;
-	static String maquina;
+	AmazonEC2 ec2;
+	String maquina;
+
+	public AmazonEC2 getEc2() {
+		return ec2;
+	}
+
+	public ClienteAWS() {
+		super();
+		try {
+			init();
+
+		} catch (AmazonServiceException ase) {
+			System.out.println("Caught Exception: " + ase.getMessage());
+			System.out.println("Reponse Status Code: " + ase.getStatusCode());
+			System.out.println("Error Code: " + ase.getErrorCode());
+			System.out.println("Request ID: " + ase.getRequestId());
+		} catch (Exception ase) {
+			System.out.println("Caught Exception: " + ase.getMessage());
+
+		}
+	}
 
 	/**
 	 * The only information needed to create a client are security credentials
@@ -90,9 +109,9 @@ public class AwsConsoleApp {
 	 * @see com.amazonaws.auth.PropertiesCredentials
 	 * @see com.amazonaws.ClientConfiguration
 	 */
-	private static void init() throws Exception {
+	private void init() throws Exception {
 		AWSCredentials credentials = new PropertiesCredentials(
-				AwsConsoleApp.class
+				ClienteAWS.class
 						.getResourceAsStream("AwsCredentials.properties"));
 
 		ec2 = new AmazonEC2Client(credentials);
@@ -107,8 +126,8 @@ public class AwsConsoleApp {
 		System.out.println("Welcome to the AWS Java SDK!");
 		System.out.println("===========================================");
 
-		init();
-
+		ClienteAWS cliente = new ClienteAWS();
+		cliente.init();
 		/*
 		 * Amazon EC2
 		 * 
@@ -136,21 +155,21 @@ public class AwsConsoleApp {
 			 * for (Reservation reservation : reservations) {
 			 * instances.addAll(reservation.getInstances()); }
 			 */
-			DescribeInstancesResult descInst = ec2
-					.describeInstances(new DescribeInstancesRequest()
-							.withInstanceIds(maquina));
-			List<Reservation> reservations = descInst.getReservations();
-			Set<Instance> instances = new HashSet<Instance>();
-			for (Reservation reservation : reservations) {
-				instances.addAll(reservation.getInstances());
-			}
-			Instance inst = instances.iterator().next();
-			cambiaTamaño(inst, "m1.small");
-				describeInstancia(inst);
-				cambiaTamaño(inst, "m1.large");
-				describeInstancia(inst);
-				
-				System.out.println("Fin");
+			// DescribeInstancesResult descInst = cliente.ec2
+			// .describeInstances(new DescribeInstancesRequest()
+			// .withInstanceIds(maquina));
+			// List<Reservation> reservations = descInst.getReservations();
+			// Set<Instance> instances = new HashSet<Instance>();
+			// for (Reservation reservation : reservations) {
+			// instances.addAll(reservation.getInstances());
+			// }
+			// Instance inst = instances.iterator().next();
+			// cambiaTamaño(inst, "m1.small");
+			// describeInstancia(inst);
+			// cambiaTamaño(inst, "m1.large");
+			// describeInstancia(inst);
+
+			System.out.println("Fin");
 		} catch (AmazonServiceException ase) {
 			System.out.println("Caught Exception: " + ase.getMessage());
 			System.out.println("Reponse Status Code: " + ase.getStatusCode());
@@ -160,15 +179,18 @@ public class AwsConsoleApp {
 
 	}
 
-	private static void cambiaTamaño(Instance inst, String tamaño) {
-		ModifyInstanceAttributeRequest modif= new ModifyInstanceAttributeRequest();
-		modif.setInstanceId(inst.getInstanceId());
-		modif.setInstanceType(tamaño);
-		ec2.modifyInstanceAttribute(modif);
-	}
+	/*
+	 * private static void cambiaTamaño(Instance inst, String tamaño) {
+	 * ModifyInstanceAttributeRequest modif = new
+	 * ModifyInstanceAttributeRequest();
+	 * modif.setInstanceId(inst.getInstanceId()); modif.setInstanceType(tamaño);
+	 * cliente.ec2.modifyInstanceAttribute(modif); }
+	 */
 
 	private static void describeInstancia(Instance inst) {
 		System.out.println(inst.getInstanceId() + " "
-				+ inst.getState().toString() + " " + inst.getInstanceType());
+				+ inst.getState().toString() + " " + inst.getState().getCode()
+				+ " " + inst.getInstanceType());
+
 	}
 }
