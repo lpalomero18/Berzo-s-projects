@@ -1,7 +1,9 @@
 package com.osfera;
 import com.amazonaws.services.ec2.model.Address;
 import com.amazonaws.services.ec2.model.Instance;
+import com.amazonaws.services.ec2.model.ModifyInstanceAttributeRequest;
 import com.amazonaws.services.ec2.model.StartInstancesRequest;
+import com.amazonaws.services.ec2.model.StopInstancesRequest;
 
 public class InstanciaMaquina {
 	ClienteAWS cliente;
@@ -52,5 +54,26 @@ public class InstanciaMaquina {
 		cliente.getEc2().startInstances(req);
 		estadoSupuesto=1;
 	}
-	
+	public void apaga(){
+		StopInstancesRequest req = new StopInstancesRequest();
+		req.withInstanceIds(ID);
+		cliente.getEc2().stopInstances(req);
+		estadoSupuesto=1;
+	}
+	public void cambiaSmall() {
+		ModifyInstanceAttributeRequest modif = new ModifyInstanceAttributeRequest();
+		modif.withInstanceId(ID);
+		modif.setInstanceType("m1.small");
+		cliente.getEc2().modifyInstanceAttribute(modif);
+	}
+	public void cambiaLarge() {
+		ModifyInstanceAttributeRequest modif = new ModifyInstanceAttributeRequest();
+		modif.withInstanceId(ID);
+		modif.setInstanceType("m1.large");
+		cliente.getEc2().modifyInstanceAttribute(modif);
+	}
+
+	// cambiaTamaño(inst, "m1.small");
+	// describeInstancia(inst);
+	// cambiaTamaño(inst, "m1.large")
 }
