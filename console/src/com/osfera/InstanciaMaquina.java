@@ -49,10 +49,12 @@ public class InstanciaMaquina {
 		return estadoReal;
 	}
 	public void enciende(){
+		System.out.println("Arrancando "+ID);
 		StartInstancesRequest req = new StartInstancesRequest();
 		req.withInstanceIds(ID);
 		cliente.getEc2().startInstances(req);
 		estadoSupuesto=1;
+		System.out.println("Orden de arrancado dada");
 	}
 	public void apaga(){
 		StopInstancesRequest req = new StopInstancesRequest();

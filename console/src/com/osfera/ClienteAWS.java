@@ -42,7 +42,7 @@ public class ClienteAWS {
 		super();
 		try {
 
-			 maquina = new InstanciaMaquina("i-be5e68f7","",this);
+			 maquina = new InstanciaMaquina("","i-be5e68f7",this);
 			init();
 
 		} catch (AmazonServiceException ase) {
