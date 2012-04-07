@@ -31,7 +31,7 @@ import com.amazonaws.services.simpledb.model.ListDomainsResult;
 
 public class ClienteAWS {
 
-	private static final String DIRECCION_IP = "";
+	private static final String DIRECCION_IP = "54.247.176.75";
 	private static final String MAQUINA = "i-be5e68f7";
 	AmazonEC2 ec2;
 	InstanciaMaquina maquina;
@@ -46,11 +46,10 @@ public class ClienteAWS {
 			try {
 				init();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			 maquina = new InstanciaMaquina(DIRECCION_IP,MAQUINA,this);
-			 obsMaquina = new InstanciaObservador(getInstanceFromString(MAQUINA), this);
+			 obsMaquina = new InstanciaObservador(maquina, this);
 	}
 
 	/**
