@@ -74,8 +74,4 @@ public class InstanciaMaquina {
 		modif.setInstanceType("m1.large");
 		cliente.getEc2().modifyInstanceAttribute(modif);
 	}
-
-	// cambiaTamaño(inst, "m1.small");
-	// describeInstancia(inst);
-	// cambiaTamaño(inst, "m1.large")
 }

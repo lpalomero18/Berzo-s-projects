@@ -21,6 +21,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.BoxLayout;
+import javax.swing.JToggleButton;
 
 public class VentanaSimple {
 
@@ -59,13 +60,18 @@ public class VentanaSimple {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{250, 250, 0, 0};
-		gridBagLayout.rowHeights = new int[]{10	, 100, 100, 0, 0};
+		gridBagLayout.rowHeights = new int[]{85	, 100, 29, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
 		
 		JTextPane textPane = new JTextPane();
+		textPane.setEnabled(false);
+		textPane.setEditable(false);
+		textPane.setText("...conectando...");
+		cliente.getObsMaquina().registraComponente(textPane);
 		GridBagConstraints gbc_textPane = new GridBagConstraints();
+		gbc_textPane.fill = GridBagConstraints.BOTH;
 		gbc_textPane.insets = new Insets(0, 0, 5, 5);
 		gbc_textPane.gridx = 0;
 		gbc_textPane.gridy = 0;

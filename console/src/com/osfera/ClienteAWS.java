@@ -31,29 +31,26 @@ import com.amazonaws.services.simpledb.model.ListDomainsResult;
 
 public class ClienteAWS {
 
+	private static final String DIRECCION_IP = "";
+	private static final String MAQUINA = "i-be5e68f7";
 	AmazonEC2 ec2;
 	InstanciaMaquina maquina;
-
+	InstanciaObservador obsMaquina;
+	
 	public AmazonEC2 getEc2() {
 		return ec2;
 	}
 
 	public ClienteAWS() {
 		super();
-		try {
-
-			 maquina = new InstanciaMaquina("","i-be5e68f7",this);
-			init();
-
-		} catch (AmazonServiceException ase) {
-			System.out.println("Caught Exception: " + ase.getMessage());
-			System.out.println("Reponse Status Code: " + ase.getStatusCode());
-			System.out.println("Error Code: " + ase.getErrorCode());
-			System.out.println("Request ID: " + ase.getRequestId());
-		} catch (Exception ase) {
-			System.out.println("Caught Exception: " + ase.getMessage());
-
-		}
+			try {
+				init();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 maquina = new InstanciaMaquina(DIRECCION_IP,MAQUINA,this);
+			 obsMaquina = new InstanciaObservador(getInstanceFromString(MAQUINA), this);
 	}
 
 	/**
@@ -78,6 +75,24 @@ public class ClienteAWS {
 	}
 	public InstanciaMaquina getMainInstance(){
 		return maquina;
+	}
+
+	public Instance getInstanceFromString (String instanceID) {
+		Instance instance;
+			DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest()
+					.withInstanceIds(instanceID);
+			DescribeInstancesResult describeInstancesResult = getEc2()
+					.describeInstances(describeInstancesRequest);
+			List<Reservation> reservations = describeInstancesResult
+					.getReservations();
+			instance = reservations.get(0).getInstances().get(0);
+		
+		return instance;
+		
+	}
+
+	public InstanciaObservador getObsMaquina() {
+		return obsMaquina;
 	}
 
 }
