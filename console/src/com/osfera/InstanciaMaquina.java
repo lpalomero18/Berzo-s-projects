@@ -70,7 +70,6 @@ public class InstanciaMaquina {
 			System.out.println("Orden de arrancado dada");
 			Runnable r = new Runnable() {
 
-				@Override
 				public void run() {
 					// TODO Auto-generated method stub
 					while (cliente.getObsMaquina().estado != 16) {
