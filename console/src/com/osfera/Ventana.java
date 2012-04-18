@@ -1,20 +1,14 @@
 package com.osfera;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import java.awt.GridLayout;
+
 import javax.swing.JButton;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.BoxLayout;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.JSlider;
+import javax.swing.SwingConstants;
 
 public class Ventana {
 

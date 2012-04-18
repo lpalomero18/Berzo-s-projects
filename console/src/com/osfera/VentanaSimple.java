@@ -4,31 +4,16 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
 import javax.swing.JTextPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import java.awt.Image;
 import java.awt.Insets;
-import java.awt.FlowLayout;
-import javax.swing.JFormattedTextField;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JToggleButton;
-import javax.swing.JComboBox;
-import java.awt.Canvas;
 import javax.swing.JLabel;
 import java.awt.Color;
-import java.awt.SystemColor;
 
 public class VentanaSimple {
 
