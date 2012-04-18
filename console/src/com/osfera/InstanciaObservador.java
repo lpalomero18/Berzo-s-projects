@@ -3,8 +3,6 @@ package com.osfera;
 import javax.swing.JTextPane;
 
 import com.amazonaws.services.ec2.model.DescribeInstanceAttributeRequest;
-import com.amazonaws.services.ec2.model.DescribeInstanceStatusRequest;
-import com.amazonaws.services.ec2.model.DescribeInstanceStatusResult;
 import com.amazonaws.services.ec2.model.DescribeInstancesRequest;
 import com.amazonaws.services.ec2.model.DescribeInstancesResult;
 import com.amazonaws.services.ec2.model.Instance;

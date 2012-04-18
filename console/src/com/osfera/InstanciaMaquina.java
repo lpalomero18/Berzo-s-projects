@@ -110,6 +110,15 @@ public class InstanciaMaquina {
 			modif.setInstanceType("m1.small");
 			cliente.getEc2().modifyInstanceAttribute(modif);
 		}
+	}	
+	public void cambiaMicro() {
+
+		if (cliente.getObsMaquina().estado == 80) {
+			ModifyInstanceAttributeRequest modif = new ModifyInstanceAttributeRequest();
+			modif.withInstanceId(ID);
+			modif.setInstanceType("t1.micro");
+			cliente.getEc2().modifyInstanceAttribute(modif);
+		}
 	}
 
 	public void cambiaLarge() {

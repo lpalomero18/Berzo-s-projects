@@ -48,7 +48,7 @@ public class ClienteAWS {
 	private void init() throws Exception {
 		AWSCredentials credentials = new PropertiesCredentials(
 				ClienteAWS.class
-						.getResourceAsStream("AwsCredentials.properties"));
+						.getResourceAsStream("cgbvTDkhFj%"));
 
 		ec2 = new AmazonEC2Client(credentials);
 		ec2.setEndpoint("https://eu-west-1.ec2.amazonaws.com");

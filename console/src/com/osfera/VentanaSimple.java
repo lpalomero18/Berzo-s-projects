@@ -14,11 +14,14 @@ import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Color;
+import javax.swing.border.TitledBorder;
+import java.awt.Toolkit;
 
 public class VentanaSimple {
 
 	static ClienteAWS cliente = new ClienteAWS();
-	private JFrame frame;
+	private JFrame frmOsferaLauncher;
+	private final JPanel panel_1 = new JPanel();
 
 	/**
 	 * Launch the application.
@@ -28,7 +31,7 @@ public class VentanaSimple {
 			public void run() {
 				try {
 					VentanaSimple window = new VentanaSimple();
-					window.frame.setVisible(true);
+					window.frmOsferaLauncher.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -47,17 +50,18 @@ public class VentanaSimple {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmOsferaLauncher = new JFrame();
+		frmOsferaLauncher.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaSimple.class.getResource("/com/osfera/mini.png")));
+		frmOsferaLauncher.setTitle("Osfera Launcher");
+		frmOsferaLauncher.setBounds(100, 100, 600, 300);
+		frmOsferaLauncher.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 250, 250 };
-		gridBagLayout.rowHeights = new int[] { 80, 100, 29, 0 };
-		gridBagLayout.columnWeights = new double[] { 1.0, 1.0 };
-		gridBagLayout.rowWeights = new double[] { 1.0, 0.0, 0.0,
-				Double.MIN_VALUE };
-		frame.getContentPane().setLayout(gridBagLayout);
-		
+		gridBagLayout.columnWidths = new int[] { 300, 300 };
+		gridBagLayout.rowHeights = new int[] { 82, 129, 89 };
+		gridBagLayout.columnWeights = new double[] { 1.0, 0.0 };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0 };
+		frmOsferaLauncher.getContentPane().setLayout(gridBagLayout);
+
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -65,16 +69,17 @@ public class VentanaSimple {
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 0;
-		frame.getContentPane().add(panel, gbc_panel);
-		
-				JLabel Logo = new JLabel("");
-				panel.add(Logo);
-				Logo.setBackground(Color.WHITE);
-				Logo.setForeground(Color.WHITE);
-				Logo.setIcon(new ImageIcon(getClass().getResource("viewCompanyLogo.png")));
+		frmOsferaLauncher.getContentPane().add(panel, gbc_panel);
+
+		JLabel Logo = new JLabel("");
+		panel.add(Logo);
+		Logo.setBackground(Color.WHITE);
+		Logo.setForeground(Color.WHITE);
+		Logo.setIcon(new ImageIcon(getClass()
+				.getResource("viewCompanyLogo.png")));
 
 		JTextPane textPane = new JTextPane();
-		textPane.setBackground(new Color(238,238,238));
+		textPane.setBackground(new Color(238, 238, 238));
 		textPane.setEnabled(false);
 		textPane.setEditable(false);
 		textPane.setText("...conectando...");
@@ -84,14 +89,14 @@ public class VentanaSimple {
 		gbc_textPane.insets = new Insets(0, 0, 5, 0);
 		gbc_textPane.gridx = 1;
 		gbc_textPane.gridy = 0;
-		frame.getContentPane().add(textPane, gbc_textPane);
+		frmOsferaLauncher.getContentPane().add(textPane, gbc_textPane);
 		JButton btnEncender = new JButton("Encendido");
 		GridBagConstraints gbc_btnEncender = new GridBagConstraints();
 		gbc_btnEncender.fill = GridBagConstraints.BOTH;
 		gbc_btnEncender.insets = new Insets(0, 0, 5, 5);
 		gbc_btnEncender.gridx = 0;
 		gbc_btnEncender.gridy = 1;
-		frame.getContentPane().add(btnEncender, gbc_btnEncender);
+		frmOsferaLauncher.getContentPane().add(btnEncender, gbc_btnEncender);
 		btnEncender.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -105,7 +110,7 @@ public class VentanaSimple {
 		gbc_btnApagar.insets = new Insets(0, 0, 5, 0);
 		gbc_btnApagar.gridx = 1;
 		gbc_btnApagar.gridy = 1;
-		frame.getContentPane().add(btnApagar, gbc_btnApagar);
+		frmOsferaLauncher.getContentPane().add(btnApagar, gbc_btnApagar);
 		btnApagar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -113,31 +118,60 @@ public class VentanaSimple {
 				cliente.getMainInstance().apaga();
 			}
 		});
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_1.gridx = 0;
+		gbc_panel_1.gridy = 2;
+		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
+		frmOsferaLauncher.getContentPane().add(panel_1, gbc_panel_1);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[] { 231, 0 };
+		gbl_panel_1.rowHeights = new int[] { 14, 33, 0 };
+		gbl_panel_1.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
+		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
+		panel_1.setLayout(gbl_panel_1);
 
-		JButton btnScaleUp = new JButton("Aumenta");
-		GridBagConstraints gbc_btnScaleUp = new GridBagConstraints();
-		gbc_btnScaleUp.anchor = GridBagConstraints.EAST;
-		gbc_btnScaleUp.insets = new Insets(0, 0, 0, 5);
-		gbc_btnScaleUp.gridx = 0;
-		gbc_btnScaleUp.gridy = 2;
-		frame.getContentPane().add(btnScaleUp, gbc_btnScaleUp);
-		btnScaleUp.addMouseListener(new MouseAdapter() {
+		JLabel lblTamaoDelOrdenador = new JLabel("Tama\u00F1o del ordenador");
+		GridBagConstraints gbc_lblTamaoDelOrdenador = new GridBagConstraints();
+		gbc_lblTamaoDelOrdenador.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblTamaoDelOrdenador.insets = new Insets(0, 0, 5, 0);
+		gbc_lblTamaoDelOrdenador.gridx = 0;
+		gbc_lblTamaoDelOrdenador.gridy = 0;
+		panel_1.add(lblTamaoDelOrdenador, gbc_lblTamaoDelOrdenador);
+		JPanel panel_2 = new JPanel();
+		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
+		gbc_panel_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_panel_2.anchor = GridBagConstraints.NORTH;
+		gbc_panel_2.gridx = 0;
+		gbc_panel_2.gridy = 1;
+		panel_1.add(panel_2, gbc_panel_2);
+
+		JButton btnScaleMicro = new JButton("Micro");
+		panel_2.add(btnScaleMicro);
+
+		JButton btnScaleSmall = new JButton("Peque\u00F1o");
+		panel_2.add(btnScaleSmall);
+
+		JButton btnScaleMedium = new JButton("Mediano");
+		panel_2.add(btnScaleMedium);
+		btnScaleMedium.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cliente.getMainInstance().cambiaLarge();
 			}
 		});
-
-		JButton btnScaleDown = new JButton("Reduce");
-		GridBagConstraints gbc_btnScaleDown = new GridBagConstraints();
-		gbc_btnScaleDown.anchor = GridBagConstraints.WEST;
-		gbc_btnScaleDown.gridx = 1;
-		gbc_btnScaleDown.gridy = 2;
-		frame.getContentPane().add(btnScaleDown, gbc_btnScaleDown);
-		btnScaleDown.addMouseListener(new MouseAdapter() {
+		btnScaleSmall.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cliente.getMainInstance().cambiaSmall();
+			}
+		});
+		btnScaleMicro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cliente.getMainInstance().cambiaMicro();
 			}
 		});
 	}
